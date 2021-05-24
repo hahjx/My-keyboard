@@ -9,9 +9,20 @@
 ;CapsLock + -       |发送横线
 
 
-SetCapsLockState, alwaysoff
 
-CapsLock::send,{enter} 
+
+CapsLock & n::
+    send,{LButton}
+    Return
+CapsLock & m::
+    send,{RButton}
+    Return
+CapsLock & q::
+    return
+CapsLock::
+  send,{enter} 
+  SetCapsLockState, alwaysoff
+  return
 CapsLock & j::send,{left}
 CapsLock & l::send,{right}
 CapsLock & i::send,{up}
@@ -35,6 +46,34 @@ CapsLock & h::
 CapsLock & p::
     send,{BackSpace}
     Return
+CapsLock & w::
+    send,{ctrldown}{w}
+    send,{ctrlup}
+    Return
+CapsLock & t::
+    send,{ctrldown}{t}
+    send,{ctrlup}
+    Return
+CapsLock & f::
+    send,{ctrldown}{Tab}
+    send,{ctrlup}
+    Return
+CapsLock & d::
+    send,{ctrldown}{ShiftDown}{Tab}
+    send,{ctrlup}{ShiftUp}
+    Return
+CapsLock & s::
+    send,{ctrldown}{s}
+    send,{ctrlup}
+    Return
+CapsLock & r::
+    send,{ctrldown}{r}
+    send,{ctrlup}
+    Return
+CapsLock & y::
+    send,{ctrldown}{BackSpace}
+    send,{ctrlup}
+    Return  
 capslock & [::
     send,{Delete}
     Return
@@ -42,11 +81,20 @@ CapsLock & c::
     send,{ctrldown}{c}
     send,{ctrlup}
     Return
+CapsLock & x::
+    send,{ctrldown}{x}
+    send,{ctrlup}
+    Return
+CapsLock & a::
+    send,{ctrldown}{a}
+    send,{ctrlup}
+    Return
+
 CapsLock & v::
     send,{ctrldown}{v}
     send,{ctrlup}
     Return
-CapsLock & -::
+CapsLock & `::
     send,--------------------------------------------------------
     return
 CapsLock & z::
@@ -62,19 +110,47 @@ CapsLock & z::
 ;Alt + d        |返回桌面
 ;Alt + 4        |退出当前程序
 
-LAlt & i::
-    send,{AltDown}{Esc}
-    send,{AltUp}
-    WinMaximize, A
-return
-LAlt & k::
-    send,{AltDown}{ShiftDown}{Esc}
-    send,{ShiftUp}
-    send,{AltUp}
-    WinMaximize,A
-return
-LAlt & j::ShiftAltTab
-LAlt & l::AltTab
+; LAlt & i::
+;     send,{AltDown}{Esc}
+;     send,{AltUp}
+;     WinActivate,A
+;     ;WinMaximize, A
+; return
+; LAlt & k::
+;     send,{AltDown}{ShiftDown}{Esc}
+;     send,{ShiftUp}
+;     send,{AltUp}
+;     WinActivate,A
+;     ;WinMaximize,A
+; return
+; LAlt & j::ShiftAltTab
+; LAlt & l::AltTab
+Alt & i::
+  Send, {shiftdown}{up}
+  send,{shiftup}
+  Return
+Alt & k::
+  Send, {shiftdown}{Down}
+  send,{shiftup}
+  Return
+Alt & j::
+  Send, {shiftdown}{Left}
+  send,{shiftup}
+  Return
+Alt & l::
+  Send, {shiftdown}{Right}
+  send,{shiftup}
+  Return
+Alt & h::
+  Send, {shiftdown}{Home}
+  send,{shiftup}
+  Return
+Alt & `;::
+  Send, {shiftdown}{End}
+  send,{shiftup}
+  Return
+
+LAlt & CapsLock::AltTab
 LAlt & d::
     send,{LWinDown}{d}
     send,{LWinUp}
@@ -94,7 +170,7 @@ return
 ; return
 
 ;COLOR
-CapsLock & R::
+CapsLock & e::
     MouseGetPos, a,b
     PixelGetColor, c,a,b,RGB
     MsgBox, color is %c%
@@ -111,35 +187,43 @@ Return
 ;q(qq)
 ;w(微信)
 ;围绕run进行程序的启动
-CapsLock & m::
-    Run, D:\sf-mybase_ver735\mybase.exe
-    WinMaximize, A
-    return
-CapsLock & s::
-    Run,D:\sf-Everything\Everything.exe
-    return
+; CapsLock & m::
+;     Run, D:\sf-mybase_ver735\mybase.exe
+;     WinMaximize, A
+;     return
 
-CapsLock & b::
-    Run,https://www.bilibili.com/
 
-    return
+; CapsLock & b::
+;     Run,https://www.bilibili.com/
 
-CapsLock & a::
-    Run,https://www.baidu.com/
-    return
+;     return
 
-CapsLock & q::
-    Run,D:\sf-QQ\Bin\QQScLauncher.exe
-    return
+; ; CapsLock & a::
+; ;     Run,https://www.baidu.com/
+; ;     return
 
-CapsLock & w::
-    Run,D:\sf-WeChat\WeChat\WeChat.exe
-    return
+; ; CapsLock & q::
+; ;     Run,D:\sf-QQ\Bin\QQScLauncher.exe
+; ;     return
+
+; CapsLock & w::
+;     Run,D:\sf-WeChat\WeChat\WeChat.exe
+;     return
 
 rbutton::send,{rbutton}
 rbutton & wheelup::
+
+
 send,{volume_up}
 return
 rbutton & wheeldown::
 send,{volume_down}
 return
+
+; SetScrollLockState, AlwaysOff
+PrintScreen & Pause::
+  DllCall("PowrProf\SetSuspendState", "int", 1, "int", 0, "int", 0)
+  Return
+; Pause::
+;   DllCall("PowrProf\SetSuspendState", "int", 0, "int", 0, "int", 0)
+;   Return
