@@ -151,10 +151,10 @@ Alt & `;::
   Return
 
 LAlt & CapsLock::AltTab
-LAlt & d::
-    send,{LWinDown}{d}
-    send,{LWinUp}
-return
+; LAlt & d::
+;     send,{LWinDown}{d}
+;     send,{LWinUp}
+; return
 LAlt & 4::
     send,{AltDown}{F4}
     send,{AltUp}
